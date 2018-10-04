@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { calculateWinner } from './helpers';
 import Board from './Board';
+import Moves from './Moves';
 
 class Game extends Component {
     state = {
@@ -41,16 +42,6 @@ class Game extends Component {
         const { history, stepNumber, xIsNext } = this.state;
         const current = history[stepNumber];
         const winner = calculateWinner(current.squares);
-        const moves = history.map((step, move) => {
-            const desc = move ?
-                'Go to move #' + move :
-                'Go to game start';
-            return (
-                <li key={move}>
-                    <button onClick={() => this.jumpTo(move)}>{desc}</button>
-                </li>
-            );
-        });
 
         let status;
         if (winner) {
@@ -68,7 +59,7 @@ class Game extends Component {
                 </div>
                 <div className="game-info">
                     <div>{status}</div>
-                    <ol>{moves}</ol>
+                    <Moves history={history} />
                 </div>
             </div>
         );
