@@ -3,9 +3,11 @@ import React, { Component } from 'react';
 import Square from './Square';
 
 class Board extends Component {
+    configArray = [0,1,2];
     renderSquare(i) {
         return (
             <Square
+                key={i}
                 value={this.props.squares[i]}
                 onClick={() => this.props.onClick(i)}
             />
@@ -13,23 +15,23 @@ class Board extends Component {
     }
 
     render() {
+        const { configArray } = this;
         return (
             <div>
-                <div className="board-row">
-                    {this.renderSquare(0)}
-                    {this.renderSquare(1)}
-                    {this.renderSquare(2)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(3)}
-                    {this.renderSquare(4)}
-                    {this.renderSquare(5)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(6)}
-                    {this.renderSquare(7)}
-                    {this.renderSquare(8)}
-                </div>
+                {
+                    configArray.map((row, rowId) => (
+                        <div
+                            key={rowId}
+                            className="board-row"
+                        >
+                            {
+                                configArray.map((col, colId) => (
+                                    this.renderSquare(colId + rowId*configArray.length)
+                                ))
+                            }
+                        </div>
+                    ))
+                }
             </div>
         );
     }
