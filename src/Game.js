@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import { calculateWinner } from './helpers';
 import Board from './Board';
 
-class Game extends React.Component {
+class Game extends Component {
     state = {
         history: [{
             squares: Array(9).fill(null)
