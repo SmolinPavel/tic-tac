@@ -31,7 +31,7 @@ class Game extends Component {
         });
     }
 
-    jumpTo(step) {
+    jumpTo = (step) => {
         this.setState({
             stepNumber: step,
             xIsNext: (step % 2) === 0,
@@ -59,7 +59,11 @@ class Game extends Component {
                 </div>
                 <div className="game-info">
                     <div>{status}</div>
-                    <Moves history={history} />
+                    <Moves
+                        history={history}
+                        onClick={this.jumpTo}
+                        stepNumber={stepNumber}
+                    />
                 </div>
             </div>
         );
