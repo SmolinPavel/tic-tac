@@ -10,6 +10,7 @@ class Board extends Component {
                 key={i}
                 value={this.props.squares[i]}
                 onClick={() => this.props.onClick(i)}
+                colored={this.props.winLine && ~this.props.winLine.indexOf(i)}
             />
         );
     }

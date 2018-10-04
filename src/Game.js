@@ -44,8 +44,10 @@ class Game extends Component {
         const winner = calculateWinner(current.squares);
 
         let status;
+        let winLine;
         if (winner) {
-            status = 'Winner: ' + winner;
+            status = 'Winner: ' + winner.sign;
+            winLine = winner.winLine;
         } else {
             status = 'Next player: ' + (xIsNext ? 'X' : 'O');
         }
@@ -55,6 +57,7 @@ class Game extends Component {
                     <Board
                         squares={current.squares}
                         onClick={(i) => this.handleClick(i)}
+                        winLine={winLine}
                     />
                 </div>
                 <div className="game-info">
