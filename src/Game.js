@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { calculateWinner } from './helpers';
 import Board from './Board';
 import Moves from './Moves';
+import SortToggle from './SortToggle';
 
 class Game extends Component {
     state = {
@@ -11,6 +12,7 @@ class Game extends Component {
         }],
         stepNumber: 0,
         xIsNext: true,
+        toggle: false,
     };
 
     handleClick(i) {
@@ -31,6 +33,10 @@ class Game extends Component {
         });
     }
 
+    handleSortToggle = () => {
+        this.setState({ toggle: !this.state.toggle });
+    }
+
     jumpTo = (step) => {
         this.setState({
             stepNumber: step,
@@ -39,7 +45,7 @@ class Game extends Component {
     }
 
     render() {
-        const { history, stepNumber, xIsNext } = this.state;
+        const { history, stepNumber, xIsNext, toggle } = this.state;
         const current = history[stepNumber];
         const winner = calculateWinner(current.squares);
 
@@ -62,10 +68,15 @@ class Game extends Component {
                 </div>
                 <div className="game-info">
                     <div>{status}</div>
+                    <SortToggle
+                        value={toggle}
+                        onChange={this.handleSortToggle}
+                    />
                     <Moves
                         history={history}
                         onClick={this.jumpTo}
                         stepNumber={stepNumber}
+                        toggle={toggle}
                     />
                 </div>
             </div>
